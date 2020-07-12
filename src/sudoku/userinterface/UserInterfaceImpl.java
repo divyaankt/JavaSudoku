@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
@@ -11,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sudoku.constants.GameState;
 import sudoku.problemdomain.Coordinates;
 import sudoku.problemdomain.SudokuGame;
 
@@ -170,11 +172,45 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
 
     @Override
     public void updateSquare(int x, int y, int input) {
+        SudokuTextField tile = textFieldCoordinates.get(new Coordinates(x, y));
+
+        String value = Integer.toString(input);
+
+        if (value.equals("0"))
+            value = "";
+
+        tile.textProperty().setValue(value);
 
     }
 
     @Override
     public void updateBoard(SudokuGame game) {
+        for (int xIndex = 0; xIndex < 9; xIndex++) {
+            for (int yIndex = 0; yIndex < 9; yIndex++) {
+                TextField tile = textFieldCoordinates.get(new Coordinates(xIndex, yIndex));
+
+                String value = Integer.toString(
+                        game.getCopyOfGridState()[xIndex][yIndex]
+                );
+
+                if (value.equals("0")) value = "";
+                tile.setText(
+                        value
+                );
+
+                //If a given tile has a non-zero value and the state of the game is GameState.NEW, then mark
+                //the tile as read only. Otherwise, ensure that it is NOT read only.
+                if (game.getGameState() == GameState.NEW){
+                    if (value.equals("")) {
+                        tile.setStyle("-fx-opacity: 1;");
+                        tile.setDisable(false);
+                    } else {
+                        tile.setStyle("-fx-opacity: 0.8;");
+                        tile.setDisable(true);
+                    }
+                }
+            }
+        }
 
     }
 
