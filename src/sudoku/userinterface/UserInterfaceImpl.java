@@ -52,7 +52,7 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
         drawSudokuBoard(root);
         drawTextFields(root);
         drawGridLines(root);
-        stage.show()
+        stage.show();
     }
 
     private void drawGridLines(Group root) {
@@ -163,7 +163,7 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     }
 
     private void drawBackground(Group root) {
-        Scene scene = new Scene();
+        Scene scene = new Scene(root, WINDOW_X, WINDOW_Y);
         scene.setFill(WINDOW_BG_COLOR);
         stage.setScene(scene);
     }
