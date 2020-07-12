@@ -131,6 +131,17 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     }
 
     private void drawSudokuBoard(Group root) {
+        Rectangle boardBG = new Rectangle();
+
+        boardBG.setX(BOARD_PADDING);
+        boardBG.setY(BOARD_PADDING);
+
+        boardBG.setWidth(BOARD_X_AND_Y);
+        boardBG.setHeight(BOARD_X_AND_Y);
+
+        boardBG.setFill(BOARD_BG_COLOR);
+
+        root.getChildren().addAll(boardBG);
     }
 
     private void drawTitle(Group root) {
