@@ -8,6 +8,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sudoku.problemdomain.Coordinates;
 import sudoku.problemdomain.SudokuGame;
@@ -145,6 +146,14 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     }
 
     private void drawTitle(Group root) {
+
+        Text title = new Text();
+        title.setFill(Color.WHITE);
+
+        Font titleFont = new Font(43);
+        title.setFont(titleFont);
+
+        root.getChildren().add(title);
     }
 
     private void drawBackground(Group root) {
